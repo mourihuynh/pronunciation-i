@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luyện phát âm /ɪ/ và /iː/</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --accent: #0d9488;
+      --accent-light: #f0fdfa;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --ok: #16a34a;
+      --err: #dc2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; }
+    header h1 { font-size: 1.75rem; color: var(--text); }
+    header p { color: var(--muted); margin-top: 6px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; }
+    .badge-short { background: var(--primary-light); color: var(--primary); }
+    .badge-long { background: var(--accent-light); color: var(--accent); }
+    .card ul { margin-top: 10px; padding-left: 18px; color: #334155; font-size: 0.95rem; }
+    .card li { margin-bottom: 6px; }
+
+    .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    .pairs-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 24px; }
+    .pairs-table th, .pairs-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
+    .pairs-table th { background: #f1f5f9; font-size: 0.9rem; color: var(--muted); }
+    .btn-speak {
+      border: 1px solid var(--border); background: #fff; color: var(--text);
+      padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-speak:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+
+    .quiz-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .quiz-controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+    .btn-primary {
+      background: var(--primary); color: #fff; border: none; padding: 10px 16px;
+      border-radius: 8px; font-weight: 600; cursor: pointer;
+    }
+    .btn-primary:hover { opacity: 0.92; }
+    .choice-btn {
+      padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+      background: #f8fafc; font-weight: 700; font-size: 1rem; cursor: pointer;
+    }
+    .choice-btn:hover { border-color: var(--primary); }
+    #feedback { margin-top: 10px; font-weight: 600; min-height: 24px; }
+    .ok { color: var(--ok); }
+    .err { color: var(--err); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Phân biệt âm /ɪ/ và âm /iː/</h1>
+      <p>Nghe mẫu, so sánh cặp từ tối thiểu và luyện nghe phản xạ</p>
+    </header>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="badge badge-short">/ɪ/ — Nguyên âm ngắn</span>
+        <h3>Thả lỏng, hơi hướng về "ê/ư"</h3>
+        <ul>
+          <li><b>Môi:</b> Thả lỏng, ít căng ngang.</li>
+          <li><b>Lưỡi:</b> Hơi thấp và lùi nhẹ so với /iː/.</li>
+          <li><b>Độ dài:</b> Ngắn và dứt khoát.</li>
+          <li><b>Ví dụ:</b> <i>sit, ship, bit, live, fill</i>.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-long">/iː/ — Nguyên âm dài</span>
+        <h3>Căng miệng, kéo dài như cười mỉm</h3>
+        <ul>
+          <li><b>Môi:</b> Căng sang hai bên như đang mỉm cười nhẹ.</li>
+          <li><b>Lưỡi:</b> Nâng cao và đẩy về phía trước.</li>
+          <li><b>Độ dài:</b> Kéo dài gấp đôi /ɪ/.</li>
+          <li><b>Ví dụ:</b> <i>seat, sheep, beat, leave, feel</i>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-title">Cặp từ tối thiểu (Minimal Pairs) — Bấm để nghe</div>
+    <table class="pairs-table">
+      <thead>
+        <tr>
+          <th>Âm /ɪ/ (Ngắn)</th>
+          <th>Nghe /ɪ/</th>
+          <th>Âm /iː/ (Dài)</th>
+          <th>Nghe /iː/</th>
+        </tr>
+      </thead>
+      <tbody id="pairsBody"></tbody>
+    </table>
+
+    <div class="quiz-box">
+      <div class="section-title">Luyện nghe nhanh: Bạn vừa nghe âm nào?</div>
+      <p style="color: var(--muted); font-size: 0.92rem;">Bấm "Phát từ ngẫu nhiên", nghe kỹ rồi chọn /ɪ/ hoặc /iː/.</p>
+      <div class="quiz-controls">
+        <button class="btn-primary" id="playQuizBtn">🔊 Phát từ ngẫu nhiên</button>
+        <button class="choice-btn" data-ans="short">Âm /ɪ/</button>
+        <button class="choice-btn" data-ans="long">Âm /iː/</button>
+      </div>
+      <div id="feedback"></div>
+    </div>
+  </div>
+
+  <script>
+    const pairs = [
+      { short: "ship", long: "sheep" },
+      { short: "sit", long: "seat" },
+      { short: "bit", long: "beat" },
+      { short: "live", long: "leave" },
+      { short: "fill", long: "feel" },
+      { short: "slip", long: "sleep" }
+    ];
+
+    const tbody = document.getElementById("pairsBody");
+    pairs.forEach(p => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><b>${p.short}</b></td>
+        <td><button class="btn-speak" onclick="speak('${p.short}')">🔊 Nghe</button></td>
+        <td><b>${p.long}</b></td>
+        <td><button class="btn-speak" onclick="speak('${p.long}')">🔊 Nghe</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    function speak(word) {
+      if (!("speechSynthesis" in window)) {
+        alert("Trình duyệt chưa hỗ trợ đọc giọng nói.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.lang = "en-US";
+      utter.rate = 0.88;
+      window.speechSynthesis.speak(utter);
+    }
+
+    let currentItem = null;
+    const feedback = document.getElementById("feedback");
+
+    document.getElementById("playQuizBtn").addEventListener("click", () => {
+      const pair = pairs[Math.floor(Math.random() * pairs.length)];
+      const isShort = Math.random() < 0.5;
+      currentItem = {
+        word: isShort ? pair.short : pair.long,
+        type: isShort ? "short" : "long"
+      };
+      speak(currentItem.word);
+      feedback.className = "";
+      feedback.textContent = "Đang phát âm thanh... Hãy chọn đáp án bên cạnh.";
+    });
+
+    document.querySelectorAll(".choice-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!currentItem) {
+          feedback.className = "err";
+          feedback.textContent = "Bạn hãy bấm 'Phát từ ngẫu nhiên' trước nhé!";
+          return;
+        }
+        const picked = btn.getAttribute("data-ans");
+        if (picked === currentItem.type) {
+          feedback.className = "ok";
+          feedback.textContent = `Chính xác! Từ "${currentItem.word}" dùng âm ${picked === "short" ? "/ɪ/" : "/iː/"}.`;
+        } else {
+          feedback.className = "err";
+          feedback.textContent = `Chưa đúng. Từ "${currentItem.word}" dùng âm ${currentItem.type === "short" ? "/ɪ/" : "/iː/"}.`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
